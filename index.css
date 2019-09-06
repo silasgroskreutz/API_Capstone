@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  .blank_row
+{
+    height: 15px !important; /* overwrites any other rules */
+    background-color: #FFFFFF;
+}

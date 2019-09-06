@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FDA Animal and Veterinary Adverse Events Search site</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Search for Pet Medicine Adverse Events</h1>
+
+        <p>DISCLAIMERS: This site allows a historical search of the FDA Adverse events for reported drug interactions.</p> 
+        <p>Per FDA: "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated."</p>
+        <p>For information on any current recalls, please <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals" target="_blank">click here.</a> For information on filing a recall, <a href="https://www.fda.gov/animal-veterinary/report-problem/how-report-animal-drug-side-effects-and-product-problems" target="_blank">please click here.</a></p>
+
+        <form id="js-form">
+            <label for="search-term">Enter drug active ingredient</label>
+            <input type="text" name="drug-active-ingred" id="js-drug-active-ingred" required>
+            <p>PLEASE NOTE: FDA database requires exact spelling for searching.</p>
+            <p>For those testing site, please try "des" aka "Diethylstilbestrol" or "Phenobarbital"</p>
+
+            <label for="max-results">Maximum results (FDA Max is 99)</label>
+            <input type="number" name="max-results" id="js-max-results" value="5">
+
+            <input type="submit" value="Go!">
+        </form>
+
+        <p id="js-error-message" class="error-message"></p>
+        <section id="results" class="hidden">
+            <h2>Search results</h2>
+            <table id="results-list">
+            </table>
+        </section>
+    </div>  
+</body>
+</html>
