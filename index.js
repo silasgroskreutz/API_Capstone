@@ -11,7 +11,7 @@ function formatQueryParams(params) {
   return queryItems.join('&');
 }
 
-//This takes in the query from watch form
+//This takes in the query from watchForm
 //FDA API is frustrating as it will only take a single argument to search with along with max results
 function getEvents(searchTerm, maxResults) {
     //This is where the API Key search and limit are mapped
@@ -44,7 +44,7 @@ function getEvents(searchTerm, maxResults) {
     console.log(responseJson);
     $('#results-list').empty();
     // iterate through the items array and add them to the results table. Using nested for loops because reported animal may have been on multiple medications
-    // Also, using these results fields because advised by Vet Tech that is what they look for.
+    // Also, using these results fields; advised by Vet Tech that is what they generally look for.
     for (let i = 0; i < responseJson.results.length; i++){
       
       $('#results-list').append(

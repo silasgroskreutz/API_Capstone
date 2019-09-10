@@ -2,7 +2,6 @@
     box-sizing: border-box;
   }
 
-  /* https://piktochart.com/blog/fonts-and-colors/ - Good article for font ideas, where I found 'overpass' */
   body {
     background-color: #ccf2ff;
     font-family: 'Overpass', sans-serif;
