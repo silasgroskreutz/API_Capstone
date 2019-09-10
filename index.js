@@ -4,7 +4,7 @@
 const apiKey = '67Bd4ck0ehZCUIk0pgXXpiK3xP2liXNnyruiboJm'; 
 const searchURL = `https://api.fda.gov/animalandveterinary/event.json`;
 
-//This function is to take the take the search term to use as URL
+//This function is to take the take the search terms and change them to a URL and combine them
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -14,7 +14,7 @@ function formatQueryParams(params) {
 //This takes in the query from watch form
 //FDA API is frustrating as it will only take a single argument to search with along with max results
 function getEvents(searchTerm, maxResults) {
-    //This is where the API Key, search and limit are mapped
+    //This is where the API Key search and limit are mapped
     const params = {
       api_key: apiKey,
       search: searchTerm,
@@ -24,9 +24,6 @@ function getEvents(searchTerm, maxResults) {
     const queryString = formatQueryParams(params)
     //This is where everything is concatinated to create the search url
     const url = searchURL + '?' + queryString;
-    
-    //for debugging
-    console.log(url);
 
     // to grab the URL along with a error catching
     fetch(url)
@@ -96,7 +93,7 @@ function getEvents(searchTerm, maxResults) {
     $('#results').removeClass('hidden');
   };
 
-//This function stops default behavior and takes in the user search
+//This function stops default form behavior and takes in the user search
 function watchForm() {
     $('form').submit(event => {
       event.preventDefault();

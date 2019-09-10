@@ -2,12 +2,145 @@
     box-sizing: border-box;
   }
 
-  table, th, td {
-    border: 1px solid black;
+  /* https://piktochart.com/blog/fonts-and-colors/ - Good article for font ideas, where I found 'overpass' */
+  body {
+    background-color: #ccf2ff;
+    font-family: 'Overpass', sans-serif;
   }
 
-  .blank_row
-{
-    height: 15px !important; /* overwrites any other rules */
+  .alert_img {
+    display: none;
+  }
+
+  .icon {
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 20px;
+  }
+
+  .disclaimer {
+    font-style: italic;
+  }
+
+  #searchbutton {
+  background-color: #aeb7b8;
+  border: none;
+  color: black;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  font-family: 'Overpass', sans-serif;
+  }
+
+  .max-results {
+    padding-left: 20px;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  table, th {
+    border: 1px solid black;
+    background-color: beige;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  a {
+    color:#ff1a1a;
+  }
+
+  a:visited {
+    color:#5200cc;
+  }
+
+  a:hover {
+    color:#e68a00;
+  }
+
+  .field {
+    font-weight: bold; 
+  }
+
+  .blank_row {
+    height: 70px;
     background-color: #FFFFFF;
+  }
+
+  @media screen and (max-width: 680px) {
+    h1 {
+      font-size: 1.25em;
+    }
+
+    .alert_img {
+      display: unset;
+      width: 25%;
+      height: 25%;
+    }
+
+    .disclaimer {
+      font-size: 70%;
+    }
+    
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+
+    table, th {
+      border: 1px solid black;
+      background-color: beige;
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+    }
+  
+    th, td {
+      display: flex;
+      text-align: left;
+      padding: 4px;
+    }
+
+    .blank_row {
+      height: 30px;
+      background-color: #FFFFFF;
+    }
+
+    .max-results {
+      display: inline-block;
+      padding-left: 0px;
+    }
+
+    #searchbutton {
+      background-color: #aeb7b8;
+      border: none;
+      color: black;
+      padding: 6px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      font-family: 'Overpass', sans-serif;
+      }
+
+      .icon {
+        display: none;
+      }
+
+      .recall {
+        display: none;
+      }
 }
+

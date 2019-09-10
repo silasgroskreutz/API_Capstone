@@ -5,27 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FDA Animal and Veterinary Adverse Events Search site</title>
+    <link href="https://fonts.googleapis.com/css?family=Overpass&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 <body>
+    <img src="vet_tech_200x200.png" alt="veterinarian technician icon" class="icon">
     <div class="container">
         <h1>Search for Pet Medicine Adverse Events</h1>
 
-        <p>DISCLAIMERS: This site allows a historical search of the FDA Adverse events for reported drug interactions.</p> 
-        <p>Per FDA: "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated."</p>
-        <p>For information on any current recalls, please <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals" target="_blank">click here.</a> For information on filing a recall, <a href="https://www.fda.gov/animal-veterinary/report-problem/how-report-animal-drug-side-effects-and-product-problems" target="_blank">please click here.</a></p>
+        <p class="disclaimer">DISCLAIMER: This site allows a historical search of the FDA Adverse events for reported drug interactions.</p> 
+        <p class="disclaimer">Per FDA: "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated."</p>
+        <p class="recall">For information on current FDA recalls, please <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals" target="_blank">click here.</a> For information on filing a recall, please <a href="https://www.fda.gov/animal-veterinary/report-problem/how-report-animal-drug-side-effects-and-product-problems" target="_blank">click here.</a></p>
+
+        <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals"  target="_blank"><img src="FDA_recall.png" class="alert_img" alt="Alert image with link to FDA recalls"></a>
 
         <form id="js-form">
-            <label for="search-term">Enter drug active ingredient</label>
+            <label for="search-term" class="search-term">Enter drug active ingredient:</label>
             <input type="text" name="drug-active-ingred" id="js-drug-active-ingred" required>
+
+            <label for="max-results" class="max-results">Maximum results (FDA Max is 99):</label>
+            <input type="number" name="max-results" id="js-max-results" value="5">
             <p>PLEASE NOTE: FDA database requires exact spelling for searching.</p>
             <p>For those testing site, please try "des" aka "Diethylstilbestrol" or "Phenobarbital"</p>
 
-            <label for="max-results">Maximum results (FDA Max is 99)</label>
-            <input type="number" name="max-results" id="js-max-results" value="5">
-
-            <input type="submit" value="Go!">
+            <input type="submit" id="searchbutton" value="Search">
         </form>
 
         <p id="js-error-message" class="error-message"></p>
@@ -34,7 +38,7 @@
             <table id="results-list">
             </table>
         </section>
-    </div>  
-    <script src="index.js"></script>  
+    </div>
+    <script src="index.js"></script>   
 </body>
 </html>
