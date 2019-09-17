@@ -7,15 +7,27 @@ const searchURL = `https://api.fda.gov/animalandveterinary/event.json`;
 function getWiki(searchTerm) {
   const searchWiki = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences&titles=${searchTerm}&format=json`
   console.log(searchWiki);
-  fetch(searchWiki, {
-    mode: 'no-cors'
-  })
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    }
-  })
+  $.ajax({
+    type: 'GET',
+    url: searchWiki,
+    dataType: 'json', // use json only, not jsonp
+    crossDomain: true, // tell browser to allow cross domain.
+    xhrFields: {
+      'withCredentials': true // tell the client to send the cookies if any for the requested domain
+   },
+    success: successResponse,
+    error: failureFunction
+  });
 }
+
+function successResponse() {
+  console.log("success!");
+}
+
+function failureFunction() {
+  console.log("failure!");
+}
+
 
 //This function is to take the take the search terms and change them to a URL and combine them
 function formatQueryParams(params) {
