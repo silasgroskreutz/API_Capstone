@@ -4,6 +4,19 @@
 const apiKey = '67Bd4ck0ehZCUIk0pgXXpiK3xP2liXNnyruiboJm'; 
 const searchURL = `https://api.fda.gov/animalandveterinary/event.json`;
 
+function getWiki(searchTerm) {
+  const searchWiki = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences&titles=${searchTerm}&format=json`
+  console.log(searchWiki);
+  fetch(searchWiki, {
+    mode: 'no-cors'
+  })
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    }
+  })
+}
+
 //This function is to take the take the search terms and change them to a URL and combine them
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
@@ -36,22 +49,29 @@ function getEvents(searchTerm, maxResults) {
       .then(responseJson => displayResults(responseJson))
       .catch(err => {
         $('#js-error-message').text(`Something went wrong: ${err.message}`);
+        $('#results').addClass('hidden');
+        $('#wikipediaInfo').addClass('hidden');
+        $('#results-list').empty();
       });
   }
 
   function displayResults(responseJson) {
     // if there are previous results, remove them
-    console.log(responseJson);
     $('#results-list').empty();
+    $('#js-error-message').empty();
     // iterate through the items array and add them to the results table. Using nested for loops because reported animal may have been on multiple medications
     // Also, using these results fields; advised by Vet Tech that is what they generally look for.
     for (let i = 0; i < responseJson.results.length; i++){
+      // this is to pull out the report date from JSON and re-slice to display as user friendly
+      let reportDate = `${responseJson.results[i].original_receive_date}`;
+      let readerReportDate = reportDate.slice(4,6) + "-" + reportDate.slice(6,8) + "-" + reportDate.slice(0,4) ;
       
+      // This is where the results are added to the page
       $('#results-list').append(
         `
         <tr>
           <td class="field" colspan="2">Report Received Date:</td>
-          <td>${responseJson.results[i].original_receive_date}</td>
+          <td>${readerReportDate}</td>
         </tr>
         <tr>
           <td class="field" colspan="2">Patient Disposition</td>
@@ -86,7 +106,9 @@ function getEvents(searchTerm, maxResults) {
           <td class="field">Results:</td>
           <td>${responseJson.results[i].outcome[0].medical_status}</td> 
         </tr>
-        <tr class="blank_row"></tr>
+        <tr class="extra_row">
+          <td>###############</td>
+        </tr>
         `
         )};
     //display the results section  
@@ -100,6 +122,7 @@ function watchForm() {
       const searchTerm = $('#js-drug-active-ingred').val();
       const maxResults = $('#js-max-results').val();
       getEvents(searchTerm, maxResults);
+      getWiki(searchTerm);
     });
   }
   

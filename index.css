@@ -16,22 +16,11 @@
     width: 125px;
     height: 125px;
     margin-right: 20px;
+    display: none;
   }
 
   .disclaimer {
     font-style: italic;
-  }
-
-  #searchbutton {
-  background-color: #aeb7b8;
-  border: none;
-  color: black;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 18px;
-  font-family: 'Overpass', sans-serif;
   }
 
   .max-results {
@@ -40,20 +29,6 @@
 
   .hidden {
     visibility: hidden;
-  }
-
-  table, th {
-    border: 1px solid black;
-    background-color: beige;
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
-  }
-
-  th, td {
-    text-align: left;
-    padding: 8px;
   }
 
   a {
@@ -69,23 +44,26 @@
   }
 
   .field {
-    font-weight: bold; 
+    font-weight: bold;
   }
 
-  .blank_row {
-    height: 70px;
-    background-color: #FFFFFF;
+  .extra_row {
+    height: 75px;
+    color: black;
   }
 
-  @media screen and (max-width: 680px) {
-    h1 {
+  header {
       font-size: 1.25em;
-    }
+  }
 
-    .alert_img {
-      display: unset;
-      width: 25%;
-      height: 25%;
+  .search_notes {
+    font-size: .75em;
+  }
+
+  .alert_img {
+    width: 25%;
+    height: 25%;
+    display: unset;
     }
 
     .disclaimer {
@@ -126,11 +104,11 @@
       background-color: #aeb7b8;
       border: none;
       color: black;
-      padding: 6px 12px;
+      padding: 8px 16px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 12px;
+      font-size: 16px;
       font-family: 'Overpass', sans-serif;
       }
 
@@ -141,5 +119,52 @@
       .recall {
         display: none;
       }
-}
 
+@media screen and (min-width: 680px) {
+
+  .alert_img {
+    display: none;
+  }
+
+  .recall {
+    display: unset;
+  }
+
+  .icon {
+    float: left;
+    width: 125px;
+    height: 125px;
+    margin-right: 20px;
+    display: unset;
+  }
+
+  .disclaimer {
+    font-size: 100%;
+  }
+
+  .search_notes {
+    font-size: 1em;
+  }
+
+  #searchbutton {
+    background-color: #aeb7b8;
+    border: none;
+    color: black;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-family: 'Overpass', sans-serif;
+    }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .extra_row {
+    height: 80px;
+  }
+
+  }

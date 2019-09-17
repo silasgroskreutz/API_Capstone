@@ -12,31 +12,38 @@
 <body>
     <img src="vet_tech_200x200.png" alt="veterinarian technician icon" class="icon">
     <div class="container">
-        <h1>Search for Pet Medicine Adverse Events</h1>
+        <header>Search for Pet Medicine Adverse Events</header>
         <p class="disclaimer">DISCLAIMER: This site allows a historical search of the FDA Adverse events for reported drug interactions.</p> 
         <p class="disclaimer">Per FDA: "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated."</p>
         <p class="recall">For information on current FDA recalls, please <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals" target="_blank">click here.</a> For information on filing a recall, please <a href="https://www.fda.gov/animal-veterinary/report-problem/how-report-animal-drug-side-effects-and-product-problems" target="_blank">click here.</a></p>
         <a href="https://www.fda.gov/animal-veterinary/safety-health/recalls-withdrawals"  target="_blank"><img src="FDA_recall.png" class="alert_img" alt="Alert image with link to FDA recalls"></a>
 
-        <form id="js-form">
-            <label for="search-term" class="search-term">Enter drug active ingredient:</label>
-            <input type="text" name="drug-active-ingred" id="js-drug-active-ingred" required>
+        <fieldset>
+            <form id="js-form">
+                <label for="search-term" class="search-term">Enter drug active ingredient:</label>
+                <input type="text" name="drug-active-ingred" id="js-drug-active-ingred" required>
 
-            <label for="max-results" class="max-results">Maximum results (FDA Max is 99):</label>
-            <input type="number" name="max-results" id="js-max-results" value="5">
-            <p>PLEASE NOTE: FDA database requires exact spelling for searching.</p>
-            <p>For those testing site, please try "des" aka "Diethylstilbestrol" or "Phenobarbital"</p>
+                <label for="max-results" class="max-results">Maximum results (FDA Max is 99):</label>
+                <input type="number" name="max-results" id="js-max-results" value="5" min="1" max="99">
+                <p class="search_notes">PLEASE NOTE: FDA database requires exact spelling for searching.</p>
+                <p class="search_notes">For those testing site, please try "Diethylstilbestrol" or "Phenobarbital"</p>
+                <input type="submit" id="searchbutton" value="Search">
+            </form>
 
-            <input type="submit" id="searchbutton" value="Search">
-        </form>
+            <p id="js-error-message" class="error-message"></p>
+            <section id="wikipediaInfo" class="hidden">
+                <h2>Quick Wikipedia info:</h2>
+            </section>
 
-        <p id="js-error-message" class="error-message"></p>
-        <section id="results" class="hidden">
-            <h2>Search results</h2>
-            <table id="results-list">
-            </table>
-        </section>
+            <section id="results" class="hidden">
+                <h2>FDA Search results</h2>
+                <table id="results-list">
+                </table>
+            </section>
+        
+        </fieldset>    
     </div>
+    
     <script src="index.js"></script>   
 </body>
 </html>
