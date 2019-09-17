@@ -5,27 +5,30 @@ const apiKey = '67Bd4ck0ehZCUIk0pgXXpiK3xP2liXNnyruiboJm';
 const searchURL = `https://api.fda.gov/animalandveterinary/event.json`;
 
 function getWiki(searchTerm) {
+  //only using Heroku to pass CORS until I get to Node.js module (For my reference https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9 )
   const searchWiki = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences&titles=${searchTerm}&format=json`
-  console.log(searchWiki);
+  let data = null;
   $.ajax({
     type: 'GET',
-    url: searchWiki,
+    url: "https://cors-anywhere.herokuapp.com/" + searchWiki,
     dataType: 'json', // use json only, not jsonp
     crossDomain: true, // tell browser to allow cross domain.
-    xhrFields: {
-      'withCredentials': true // tell the client to send the cookies if any for the requested domain
-   },
-    success: successResponse,
+    success: successFunction(data),
     error: failureFunction
   });
 }
 
-function successResponse() {
-  console.log("success!");
+function successFunction(data) {
+  let wikiExtract = data;
+  $('#wikipediaInfo').append(wikiExtract);
 }
 
+
 function failureFunction() {
-  console.log("failure!");
+  $('#js-error-message').text(`Something went wrong: ${err.message}`);
+  $('#results').addClass('hidden');
+  $('#wikipediaInfo').addClass('hidden');
+  $('#results-list').empty();
 }
 
 
@@ -123,7 +126,8 @@ function getEvents(searchTerm, maxResults) {
         </tr>
         `
         )};
-    //display the results section  
+    //display the results section
+    $('#wikipediaInfo').removeClass('hidden');  
     $('#results').removeClass('hidden');
   };
 
