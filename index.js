@@ -27,6 +27,7 @@ function getWiki(searchTerm) {
       // need to set this to grab the page number to get to extract, as it is dynamic
         let wikiPage = Object.keys(response.query.pages);
         $("#wikipediaInfo").append(response["query"]["pages"][wikiPage]["extract"]);
+        $("#wikipediaInfo").css("background-color", "#f5c256");
     })
     .catch(function(error){console.log(error);});
   }
