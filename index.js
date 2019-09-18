@@ -1,38 +1,38 @@
 'use strict';
 
-// Defining my API key along with the beginning of the API URL
+// Defining my API key along with the beginning of the FDA API URL
 const apiKey = '67Bd4ck0ehZCUIk0pgXXpiK3xP2liXNnyruiboJm'; 
 const searchURL = `https://api.fda.gov/animalandveterinary/event.json`;
 
+//This is to use Wikipedia for extract information
 function getWiki(searchTerm) {
-  //only using Heroku to pass CORS until I get to Node.js module (For my reference https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9 )
-  const searchWiki = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences&titles=${searchTerm}&format=json`
-  let data = null;
-  $.ajax({
-    type: 'GET',
-    url: "https://cors-anywhere.herokuapp.com/" + searchWiki,
-    dataType: 'json', // use json only, not jsonp
-    crossDomain: true, // tell browser to allow cross domain.
-    success: successFunction(data),
-    error: failureFunction
-  });
-}
+  let url = `https://en.wikipedia.org/w/api.php`;
+  
+  let params = {
+      "action": "query",
+      "format": "json",
+      "prop": "extracts",
+      "titles": searchTerm,
+      "exintro": 1
+  };
 
-function successFunction(data) {
-  let wikiExtract = data;
-  $('#wikipediaInfo').append(wikiExtract);
-}
+  //This function is from wikimedia page on how to search their API
+  url = url + "?origin=*";
+  Object.keys(params).forEach(function(key){url += "&" + key + "=" + params[key];})
+
+  //This is to fetch from the Wikipedia extracts page
+  fetch(url)
+    .then(function(response){return response.json();})
+    .then(function(response) {
+      // need to set this to grab the page number to get to extract, as it is dynamic
+        let wikiPage = Object.keys(response.query.pages);
+        $("#wikipediaInfo").append(response["query"]["pages"][wikiPage]["extract"]);
+    })
+    .catch(function(error){console.log(error);});
+  }
 
 
-function failureFunction() {
-  $('#js-error-message').text(`Something went wrong: ${err.message}`);
-  $('#results').addClass('hidden');
-  $('#wikipediaInfo').addClass('hidden');
-  $('#results-list').empty();
-}
-
-
-//This function is to take the take the search terms and change them to a URL and combine them
+//This function is to take the take the FDA search terms and change them to a URL and combine them
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
